@@ -55,7 +55,7 @@ function Test-RecordExists {
     Add-Type -Path "C:\Program Files (x86)\MySQL\MySQL Connector NET 9.5\MySql.Data.dll"
 
     $mysqlConn = New-Object MySql.Data.MySqlClient.MySqlConnection
-    $mysqlConn.ConnectionString = "Server=$Env:DB_SERVER; Database=$Env:DB_BASE; Uid=$Env:DB_USER; Pwd=$Env:DB_PASSWD;"
+    $mysqlConn.ConnectionString = "Server=$Env:MYSQL_SERVER; Database=$Env:MYSQL_DATABASE; Uid=$Env:MYSQL_USER; Pwd=$Env:MYSQL_PASSWORD;"
     
     try {
         $mysqlConn.Open()
@@ -96,7 +96,7 @@ function Add-AdUserRecord {
     Add-Type -Path "C:\Program Files (x86)\MySQL\MySQL Connector NET 9.5\MySql.Data.dll"
 
     $mysqlConn = New-Object MySql.Data.MySqlClient.MySqlConnection
-    $mysqlConn.ConnectionString = "Server=$Env:DB_SERVER; Database=$Env:DB_BASE; Uid=$Env:DB_USER; Pwd=$Env:DB_PASSWD;"
+    $mysqlConn.ConnectionString = "Server=$Env:MYSQL_SERVER; Database=$Env:MYSQL_DATABASE; Uid=$Env:MYSQL_USER; Pwd=$Env:MYSQL_PASSWORD;"
     
     try {
         $mysqlConn.Open()
@@ -138,7 +138,7 @@ function Add-AdUserRecordFull {
 
     Add-Type -Path "C:\Program Files (x86)\MySQL\MySQL Connector NET 9.5\MySql.Data.dll"
     $mysqlConn = New-Object MySql.Data.MySqlClient.MySqlConnection
-    $mysqlConn.ConnectionString = "Server=$Env:DB_SERVER; Database=$Env:DB_BASE; Uid=$Env:DB_USER; Pwd=$Env:DB_PASSWD;"
+    $mysqlConn.ConnectionString = "Server=$Env:MYSQL_SERVER; Database=$Env:MYSQL_DATABASE; Uid=$Env:MYSQL_USER; Pwd=$Env:MYSQL_PASSWORD;"
     
     try {
         $mysqlConn.Open()
