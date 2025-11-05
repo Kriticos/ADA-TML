@@ -4,7 +4,8 @@
 Measure-TimeStart
 
 # Importa os módulos necessários
-Import-Module logs
+Import-Module dotenv
+Import-Module eventviewer
 
 # Alterado para usar horas em vez de dias
 $hours = 1
@@ -50,4 +51,4 @@ foreach ($evento in $eventos) {
 }
 
 # Tempo de execução
-Measure-TimeStop -ScriptName "zbx_win_event_4624"
+Measure-TimeStop -ScriptName "zbx_win_event"
