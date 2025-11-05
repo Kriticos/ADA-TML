@@ -67,21 +67,7 @@ function Get-WindowsEvents {
                     }
 
                     switch ($Event.Id) {
-                        4720 {
-                            $EventObject.TargetUserName = $EventDataDict['TargetUserName']
-                            $EventObject.TargetDomain = $EventDataDict['TargetDomain']
-                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
-                            $EventObject.SubjectLogonId = $EventDataDict['SubjectLogonId']
-                        }
-                        4625 {
-                            $EventObject.TargetUserName = $EventDataDict['TargetUserName']
-                            $EventObject.TargetDomain = $EventDataDict['TargetDomain']
-                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
-                        }
-                        1102 {
-                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
-                            $EventObject.SubjectLogonId = $EventDataDict['SubjectLogonId']
-                        }
+                        # Usuario conectado com sucesso
                         4624 {
                             $EventObject.TargetUserName = $EventDataDict['TargetUserName']
                             $EventObject.TargetDomain = $EventDataDict['TargetDomain']
@@ -90,7 +76,59 @@ function Get-WindowsEvents {
                             $EventObject.WorkstationName = if ($EventDataDict.ContainsKey('WorkstationName')) { $EventDataDict['WorkstationName'] } else { '' }
                             $EventObject.IpAddress = if ($EventDataDict.ContainsKey('IpAddress')) { $EventDataDict['IpAddress'] } else { '' }
                         }
-                        
+                        # Falha de logon
+                        4625 {
+                            $EventObject.TargetUserName = $EventDataDict['TargetUserName']
+                            $EventObject.TargetDomain = $EventDataDict['TargetDomain']
+                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
+                        }
+                        # Criação de novo usuário
+                        4720 {
+                            $EventObject.TargetUserName = $EventDataDict['TargetUserName']
+                            $EventObject.TargetDomain = $EventDataDict['TargetDomain']
+                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
+                            $EventObject.SubjectLogonId = $EventDataDict['SubjectLogonId']
+                        }
+                        # Habilitação de conta de usuário
+                         4722 {
+                            $EventObject.TargetUserName = $EventDataDict['TargetUserName']
+                            $EventObject.TargetDomain = $EventDataDict['TargetDomain']
+                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
+                            $EventObject.SubjectLogonId = $EventDataDict['SubjectLogonId']
+                        }
+                        # Troca de senha de usuário
+                        4723 {
+                            $EventObject.TargetUserName = $EventDataDict['TargetUserName']
+                            $EventObject.TargetDomain = $EventDataDict['TargetDomain']
+                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
+                            $EventObject.SubjectLogonId = $EventDataDict['SubjectLogonId']
+                        }
+                        # Redefinição de senha de usuário
+                        4724 {
+                            $EventObject.TargetUserName = $EventDataDict['TargetUserName']
+                            $EventObject.TargetDomain = $EventDataDict['TargetDomain']
+                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
+                            $EventObject.SubjectLogonId = $EventDataDict['SubjectLogonId']
+                        }
+                        4725 {
+                            $EventObject.TargetUserName = $EventDataDict['TargetUserName']
+                            $EventObject.TargetDomain = $EventDataDict['TargetDomain']
+                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
+                            $EventObject.SubjectLogonId = $EventDataDict['SubjectLogonId']
+                        }
+                        4726 {
+                            $EventObject.TargetUserName = $EventDataDict['TargetUserName']
+                            $EventObject.TargetDomain = $EventDataDict['TargetDomain']
+                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
+                            $EventObject.SubjectLogonId = $EventDataDict['SubjectLogonId']
+                        }
+                        4743 {
+                            $EventObject.TargetUserName = $EventDataDict['TargetUserName']
+                            $EventObject.TargetDomain = $EventDataDict['TargetDomain']
+                            $EventObject.SubjectUserName = $EventDataDict['SubjectUserName']
+                            $EventObject.SubjectLogonId = $EventDataDict['SubjectLogonId']
+                        }
+                    
                     }
 
                     $EventObject.EventDataJSON = ($EventDataDict | ConvertTo-Json -Compress)
