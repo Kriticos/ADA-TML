@@ -14,7 +14,7 @@ Get-ChildItem -Path $ModulesPath -Directory | ForEach-Object {
     }
 }
 
-Import-Env .\.env
+Import-Env .\.env -Override
 
 Write-Host "✅ Todos os módulos carregados com sucesso!" -ForegroundColor Green
 
