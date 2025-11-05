@@ -10,4 +10,4 @@ Import-Module eventviewer
 # Arquivo de configuração
 Import-Env .\modules\db.mysql\.env -Override
 
-Get-WindowsEvents -EventIDs 4722
+Get-WindowsEvents -EventIDs 4726
