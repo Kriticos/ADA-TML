@@ -21,7 +21,7 @@ Write-Host "✅ Todos os módulos carregados com sucesso!" -ForegroundColor Gree
 # Alterado para usar horas em vez de dias
 $hours = 1
 
-Write-Host "Coletando eventos $env:EVENTID_4624 dos logs $env:LOG_NAME_SECURITY da última $hours hora em $env:ZABBIX_HOST..."
+Write-Host "Coletando eventos $env:LOG_NAME_SECURITY da última $hours hora em $env:HOST..."
 
 # Define o horário de início (1 hora atrás)
 $startTime = (Get-Date).AddHours(-$hours)
