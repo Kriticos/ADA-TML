@@ -28,7 +28,7 @@ $startTime = (Get-Date).AddHours(-$hours)
 
 # Coleta os eventos dos últimos dias (mantido para compatibilidade com Get-WindowsEvents)
 $days = 1
-$eventos = Get-WindowsEvents -ComputerName $env:ZABBIX_HOST -Days $days -EventIDs $env:EVENTID_4624 -LogNames $env:LOG_NAME_SECURITY | 
+$eventos = Get-WindowsEvents -ComputerName $env:HOST -Days $days -EventIDs 1102, 4624,4625,4648,4720,4722,4723,4724,4725,4726,4739,4743 -LogNames $env:LOG_NAME_SECURITY | 
     # Filtra apenas eventos da última hora
     Where-Object { $_.TimeCreated -ge $startTime } | Select-Object TimeCreated, EventID, EventDescription, 
     @{Name="TargetUserName"; Expression={($_.EventDataJSON | ConvertFrom-Json).TargetUserName}},
@@ -44,10 +44,10 @@ foreach ($evento in $eventos) {
     $timeStamp = Get-Date $evento.TimeCreated -Format "yyyy-MM-dd HH:mm:ss"
     
     # Verificamos se o registro já existe - ADICIONADO PARÂMETRO DataBase
-    if (-not (Test-RecordExists -DataBase $env:TAB_4624 -TimeCreated $evento.TimeCreated -TargetUserName $evento.TargetUserName -SubjectUserName $evento.SubjectUserName -EventDescription $evento.EventDescription)) {
+    if (-not (Test-RecordExists -DataBase $env:MYSQL_TABLE -TimeCreated $evento.TimeCreated -TargetUserName $evento.TargetUserName -SubjectUserName $evento.SubjectUserName -EventDescription $evento.EventDescription)) {
         # Insere o registro no banco de dados - ADICIONADO PARÂMETRO DataBase
         $inserted = Add-AdUserRecordFull `
-            -DataBase $env:TAB_4624 `
+            -DataBase $env:MYSQL_TABLE `
             -TimeCreated $evento.TimeCreated `
             -TargetUserName $evento.TargetUserName `
             -SubjectUserName $evento.SubjectUserName `
