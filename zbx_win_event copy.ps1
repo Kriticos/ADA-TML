@@ -7,12 +7,6 @@ Measure-TimeStart
 Import-Module dotenv
 Import-Module eventviewer
 
-
-
-
-
-
-exit
 # Alterado para usar horas em vez de dias
 $hours = 1
 
@@ -23,7 +17,7 @@ $startTime = (Get-Date).AddHours(-$hours)
 
 # Coleta os eventos dos últimos dias (mantido para compatibilidade com Get-WindowsEvents)
 $days = 1
-$eventos = Get-WindowsEvents -ComputerName $env:ZABBIX_HOST -Days $days -EventIDs $env:EVENTID_4624 -LogNames $env:LOG_NAME_SECURITY | 
+$eventos = Get-WindowsEvents -ComputerName $env:HOST -Days $days -EventIDs $env:EVENTID_4624 -LogNames $env:LOG_NAME_SECURITY | 
     # Filtra apenas eventos da última hora
     Where-Object { $_.TimeCreated -ge $startTime } | Select-Object TimeCreated, EventID, EventDescription, 
     @{Name="TargetUserName"; Expression={($_.EventDataJSON | ConvertFrom-Json).TargetUserName}},
